@@ -47,7 +47,7 @@ def generate_gm():
     dateObj=datetime.datetime.today()
     dateObj+=timedelta(days=7)
     if(dateObj.weekday()>=6):
-        dateObj=dateObj+timedelta(days=2)
+        dateObj=dateObj+timedelta(days=1)
     wkObj=datetime.date(dateObj.year,dateObj.month,dateObj.day).isocalendar()
     d=wkObj[1]%5
     arr=[]
