@@ -114,6 +114,7 @@ if __name__ == '__main__':
     dp.add_handler(CommandHandler('start',startBot))
     dp.add_handler(CommandHandler('schedule',scheduleDisc))
     dp.add_handler(CommandHandler('currentschedule',scheduleDiscCur))
+    dp.add_handler(CommandHandler('previousschedule',scheduleDiscPrev))
     dp.add_handler(CommandHandler('daybasedschedule',day_basedSch))
 
     run(updater)
