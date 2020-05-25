@@ -83,8 +83,6 @@ def generate_sch_cur():
     return generate_sch_H(names,days,"this week")
 def generate_sch_H(names,days,suffix_d):
     sch="*Discussion schedule for "+suffix_d+"*.\n\n"
-    names=generate_gm()
-    days=generate_dt()
     dd=["Monday","Tuesday","Wednesday","Thursday","Friday"]
     for i in range(0,len(names)):
         sch+=dd[i]+", "+"-".join((str(days[i]).split("-"))[::-1])+" -- *"+names[i]+"*\n\n"
