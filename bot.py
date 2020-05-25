@@ -78,12 +78,12 @@ def generate_sch():
     days=generate_dt(7)
     return generate_sch_H(names,days,"next week")
 def generate_sch_prev():
-    names=generate_gm(-7)
-    days=generate_dt(-7)
+    names=generate_gm(-14)
+    days=generate_dt(-14)
     return generate_sch_H(names,days,"last week")
 def generate_sch_cur():
-    names = generate_gm(0)
-    days=generate_dt(0)
+    names = generate_gm(-7)
+    days=generate_dt(-7)
     return generate_sch_H(names,days,"this week")
 def generate_sch_H(names,days,suffix_d):
     sch="*Discussion schedule for "+suffix_d+"*.\n\n"
