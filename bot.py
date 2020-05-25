@@ -77,7 +77,7 @@ def generate_sch():
     names=generate_gm(7)
     days=generate_dt(7)
     return generate_sch_H(names,days,"next week")
-def generate_sch_prev():
+"""def generate_sch_prev():
     names=generate_gm(-14)
     days=generate_dt(-14)
     return generate_sch_H(names,days,"last week")
@@ -85,6 +85,7 @@ def generate_sch_cur():
     names = generate_gm(-7)
     days=generate_dt(-7)
     return generate_sch_H(names,days,"this week")
+"""
 def generate_sch_H(names,days,suffix_d):
     sch="*Discussion schedule for "+suffix_d+"*.\n\n"
     dd=["Monday","Tuesday","Wednesday","Thursday","Friday"]
@@ -101,10 +102,11 @@ def day_basedSch(bot,update):
     update.message.reply_text(day_basedsch,parse_mode=parseMode.MARKDOWN)
 def scheduleDisc(bot,update):
     update.message.reply_text(generate_sch(),parse_mode=parseMode.MARKDOWN)
-def scheduleDiscCur(bot,update):
+"""def scheduleDiscCur(bot,update):
     update.message.reply_text(generate_sch_cur(),parse_mode=parseMode.MARKDOWN)
 def scheduleDiscPrev(bot,update):
     update.message.reply_text(generate_sch_prev(),parse_mode=parseMode.MARKDOWN)
+"""
 if __name__ == '__main__':
     logger.info("Starting bot")
     updater = Updater(TOKEN)
@@ -113,8 +115,8 @@ if __name__ == '__main__':
     dp.add_handler(CommandHandler('help',showHelp))
     dp.add_handler(CommandHandler('start',startBot))
     dp.add_handler(CommandHandler('schedule',scheduleDisc))
-    dp.add_handler(CommandHandler('currentschedule',scheduleDiscCur))
-    dp.add_handler(CommandHandler('previousschedule',scheduleDiscPrev))
+   """ dp.add_handler(CommandHandler('currentschedule',scheduleDiscCur))
+    dp.add_handler(CommandHandler('previousschedule',scheduleDiscPrev))"""
     dp.add_handler(CommandHandler('daybasedschedule',day_basedSch))
 
     run(updater)
