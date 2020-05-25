@@ -81,6 +81,14 @@ def generate_sch():
     for i in range(0,len(names)):
         sch+=dd[i]+", "+"-".join((str(days[i]).split("-"))[::-1])+" -- *"+names[i]+"*\n\n"
     return sch
+def day_basedSch(bot,update):
+    day_basedsch="*Day-Based schedules*\n\n"
+    day_basedsch+="*Monday* -- Pharmacology/Pathology\n\n"
+    day_basedsch+="*Tuesday* -- Paediatrics\n\n"
+    day_basedsch+="Wednesday -- Obstetrics&Gynaecology\n\n"
+    day_basedsch+="*Thursday* -- Paediatrics\n\n"
+    day_basedsch+="*Friday* -- Medicine/Surgery"
+    update.message.reply_text(day_basedsch,parse_mode=parseMode.MARKDOWN)
 def scheduleDisc(bot,update):
     update.message.reply_text(generate_sch(),parse_mode=parseMode.MARKDOWN)
 if __name__ == '__main__':
@@ -91,4 +99,5 @@ if __name__ == '__main__':
     dp.add_handler(CommandHandler('help',showHelp))
     dp.add_handler(CommandHandler('start',startBot))
     dp.add_handler(CommandHandler('schedule',scheduleDisc))
+    dp.add_handler(CommandHandler('dayBased_schedule',day_basedSch))
     run(updater)
