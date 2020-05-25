@@ -85,7 +85,7 @@ def day_basedSch(bot,update):
     day_basedsch="*Day-Based schedules*\n\n"
     day_basedsch+="*Monday* -- Pharmacology/Pathology\n\n"
     day_basedsch+="*Tuesday* -- Paediatrics\n\n"
-    day_basedsch+="Wednesday -- Obstetrics&Gynaecology\n\n"
+    day_basedsch+="*Wednesday* -- Obstetrics&Gynaecology\n\n"
     day_basedsch+="*Thursday* -- Paediatrics\n\n"
     day_basedsch+="*Friday* -- Medicine/Surgery"
     update.message.reply_text(day_basedsch,parse_mode=parseMode.MARKDOWN)
@@ -99,5 +99,5 @@ if __name__ == '__main__':
     dp.add_handler(CommandHandler('help',showHelp))
     dp.add_handler(CommandHandler('start',startBot))
     dp.add_handler(CommandHandler('schedule',scheduleDisc))
-    dp.add_handler(CommandHandler('dayBased_schedule',day_basedSch))
+    dp.add_handler(CommandHandler('daybasedschedule',day_basedSch))
     run(updater)
