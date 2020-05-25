@@ -43,9 +43,9 @@ def showHelp(bot,update):
     msg="/help - to see available helps\n/schedule - to schedule next discussion.\n/bop - to get cool random dog pictures."
     update.message.reply_text(msg)
 group_members=os.getenv("MEMBERS").split("-");
-def generate_gm():
+def generate_gm(dayAdd):
     dateObj=datetime.datetime.today()
-    dateObj+=timedelta(days=7)
+    dateObj+=timedelta(days=dayAdd)
     if(dateObj.weekday()>=6):
         dateObj=dateObj+timedelta(days=1)
     wkObj=datetime.date(dateObj.year,dateObj.month,dateObj.day).isocalendar()
@@ -60,10 +60,10 @@ def generate_gm():
     gs=globals()["group_members"]
     name_list=[gs[i] for i in arr]
     return name_list;
-def generate_dt():
+def generate_dt(dayAdd):
     datesArr=[]
     dateObj=datetime.date.today()
-    dateObj+=timedelta(days=7)
+    dateObj+=timedelta(days=dayAdd)
     if(dateObj.weekday()>=6):
         dateObj=dateObj+timedelta(days=2)
     wk=datetime.date(dateObj.year,dateObj.month,dateObj.day)
@@ -74,7 +74,15 @@ def generate_dt():
         wk=wk+timedelta(days=1)
     return datesArr;
 def generate_sch():
-    sch="*Discussion schedule for next week*.\n\n"
+    names=generate_gm(7)
+    days=generate_dt(7)
+    return generate_sch_H(names,days,"next week")
+def generate_sch_cur():
+    names=generate_gm(-7)
+    days=generate_dt(-7)
+    return generate_sch_H(names,days,"this week")
+def generate_sch_H(names,days,suffix_d):
+    sch="*Discussion schedule for "+suffix_d+"*.\n\n"
     names=generate_gm()
     days=generate_dt()
     dd=["Monday","Tuesday","Wednesday","Thursday","Friday"]
@@ -91,6 +99,8 @@ def day_basedSch(bot,update):
     update.message.reply_text(day_basedsch,parse_mode=parseMode.MARKDOWN)
 def scheduleDisc(bot,update):
     update.message.reply_text(generate_sch(),parse_mode=parseMode.MARKDOWN)
+def scheduleDiscCur(bot,update):
+    update.message.reply_text(generate_sch_cur(),parse_mode=parseMode.MARKDOWN)
 if __name__ == '__main__':
     logger.info("Starting bot")
     updater = Updater(TOKEN)
@@ -99,5 +109,7 @@ if __name__ == '__main__':
     dp.add_handler(CommandHandler('help',showHelp))
     dp.add_handler(CommandHandler('start',startBot))
     dp.add_handler(CommandHandler('schedule',scheduleDisc))
+    dp.add_handler(CommandHandler('currentschedule',scheduleDiscCur))
     dp.add_handler(CommandHandler('daybasedschedule',day_basedSch))
+
     run(updater)
