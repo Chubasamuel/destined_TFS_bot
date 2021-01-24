@@ -8,6 +8,7 @@ import os
 import sys
 import datetime
 from datetime import timedelta
+import ast
 
 logging.basicConfig(level=logging.INFO,format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 logger = logging.getLogger()
@@ -37,7 +38,7 @@ def bop(bot, update):
     bot.send_photo(chat_id=chat_id, photo=url)
 
 def startBot(bot,update):
-    msg="Hey, Good to meet you.\nWelcome To DCOR destined_TFS_bot"+" Telegram Bot.\nDesigned and maintained by DCOR."+"\nEnter the /help command to see available helps."
+    msg=f"Hey {getUserNames(update,True)}, Good to meet you.\nWelcome To DCOR destined_TFS_bot"+" Telegram Bot.\nDesigned and maintained by DCOR."+"\nEnter the /help command to see available helps."
     update.message.reply_text(msg)
 def showHelp(bot,update):
     msg="/help - to see available helps\n/schedule - to schedule next discussion.\n/bop - to get cool random dog pictures."
@@ -102,6 +103,17 @@ def day_basedSch(bot,update):
     update.message.reply_text(day_basedsch,parse_mode=parseMode.MARKDOWN)
 def scheduleDisc(bot,update):
     update.message.reply_text(generate_sch(),parse_mode=parseMode.MARKDOWN)
+def getUserNames(updt,msg_or_not):
+    try:
+        if(msg_or_not):
+            name_user=ast.literal_eval(str(updt.message))
+            name_user=name_user["from"]["first_name"]+" "+name_user["from"]["last_name"]
+            return name_user
+        else:
+            return ""
+    except:
+        return ""
+
 """def scheduleDiscCur(bot,update):
     update.message.reply_text(generate_sch_cur(),parse_mode=parseMode.MARKDOWN)
 def scheduleDiscPrev(bot,update):
